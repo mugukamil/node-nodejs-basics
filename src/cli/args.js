@@ -1,17 +1,12 @@
-const parseArgs = () => {
-    let parsedArgs = "";
+export const parseArgs = () => {
+    let parsedArgs = [];
     let args = process.argv.slice(2);
     for (let i = 0; i < args.length; i++) {
         if (args[i].includes("--")) {
-            parsedArgs += args[i] + " is ";
-        } else {
-            parsedArgs += args[i];
-            if (args[i] !== args[args.length - 1]) {
-                parsedArgs += ", ";
-            }
+            let [key, val] = args[i].split("=");
+            parsedArgs.push({ [key.slice(2)]: val });
         }
     }
-    console.log(parsedArgs);
-};
 
-parseArgs();
+    return parsedArgs;
+};
